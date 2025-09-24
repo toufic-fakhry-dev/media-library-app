@@ -6,5 +6,6 @@ class Movie(
     loanStatus: LoanStatus,
     val genre: MovieGenre,
     val duration: Int,
-    val director: String, isAvailable: Boolean
-) : MediaItem(title, year, loanStatus, isAvailable)
+    val director: String, isAvailable: Boolean,
+    itemLogger: Logger
+) : MediaItem(title, year, loanStatus, isAvailable, itemLogger)

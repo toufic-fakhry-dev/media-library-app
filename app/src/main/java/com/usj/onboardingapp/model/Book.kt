@@ -6,5 +6,6 @@ open class Book(
     val author: String,
     loanStatus: LoanStatus,
     val pages: Int,
-    isAvailable: Boolean
-) : MediaItem(title, year, loanStatus, isAvailable)
+    isAvailable: Boolean,
+    itemLogger: Logger
+) : MediaItem(title, year, loanStatus, isAvailable, itemLogger)
