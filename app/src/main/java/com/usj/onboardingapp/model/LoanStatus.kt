@@ -7,9 +7,10 @@ sealed class LoanStatus {
     object Overdue: LoanStatus()
 
     fun getLoanStatus(mediaItem: MediaItem): String {
-        return when(mediaItem.loanStatus) {
+        val currentStatus = mediaItem.loanStatus
+        return when(currentStatus) {
             is Available -> "${mediaItem.title} is available for loan"
-            is Loaned -> "${mediaItem.title} is loaned to ${(mediaItem.loanStatus as Loaned).borrower} by ${(mediaItem.loanStatus as Loaned).dueDate}"
+            is Loaned -> "${mediaItem.title} is loaned to ${currentStatus.borrower} by ${currentStatus.dueDate}"
             is Returned -> "${mediaItem.title} has been returned"
             is Overdue -> "${mediaItem.title} is overdue"
         }
