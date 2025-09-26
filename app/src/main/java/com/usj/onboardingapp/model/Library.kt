@@ -1,6 +1,8 @@
 package com.usj.onboardingapp.model
 
 typealias LibraryCollection = MutableList<MediaItem>
+val fileLoggerForMovies = FileLogger("movie_operations.log")
+val consoleLogger = ConsoleLogger()
 
 class Library {
     val allItems: LibraryCollection by lazy {
@@ -12,7 +14,8 @@ class Library {
                 "F. Scott Fitzgerarld",
                 LoanStatus.Available,
                 180,
-                true
+                true,
+                consoleLogger
             ),
             Movie(
                 "The Shawshank Redemption",
@@ -21,7 +24,8 @@ class Library {
                 MovieGenre.DRAMA,
                 190,
                 "Frank Darabont",
-                true
+                true,
+                fileLoggerForMovies
             )
         )
     }
