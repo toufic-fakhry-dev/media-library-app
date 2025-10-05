@@ -2,16 +2,19 @@ package com.usj.onboardingapp
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.usj.onboardingapp.fragments.LibraryFragment
+import com.usj.onboardingapp.fragments.MyListFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        printLogAndToast("On Create")
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -19,36 +22,23 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        printLogAndToast("On Start")
-    }
+        val libraryButton: Button = findViewById(R.id.libraryListButton)
+        val myListButton: Button = findViewById(R.id.myListButton)
 
-    override fun onResume() {
-        super.onResume()
-        printLogAndToast("On Resume")
-    }
+        val fragmentManager = supportFragmentManager
 
-    override fun onPause() {
-        super.onPause()
-        printLogAndToast("On Pause")
-    }
+        libraryButton.setOnClickListener {
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainerView, LibraryFragment())
+            fragmentTransaction.commit()
+        }
 
-    override fun onStop() {
-        super.onStop()
-        printLogAndToast("On Stop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        printLogAndToast("On Destroy")
-    }
-
-    fun printLogAndToast(event: String){
-        Toast.makeText(this, "$event was called!", Toast.LENGTH_SHORT).show()
-        Log.d("lifecycle","$event was called")
+        myListButton.setOnClickListener {
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragmentContainerView, MyListFragment())
+            fragmentTransaction.commit()
+        }
     }
 
 
