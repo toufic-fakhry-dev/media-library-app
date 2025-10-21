@@ -15,7 +15,8 @@ class Library {
                 LoanStatus.Available,
                 180,
                 true,
-                consoleLogger
+                consoleLogger,
+                BookGenre.ROMANCE
             ),
             Movie(
                 "The Shawshank Redemption",

@@ -9,6 +9,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.usj.onboardingapp.fragments.LibraryFragment
 import com.usj.onboardingapp.fragments.MyListFragment
 
@@ -29,16 +31,19 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
 
         libraryButton.setOnClickListener {
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragmentContainerView, LibraryFragment())
-            fragmentTransaction.commit()
+            displayFragment(LibraryFragment.newInstance(), fragmentManager)
         }
 
         myListButton.setOnClickListener {
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragmentContainerView, MyListFragment())
-            fragmentTransaction.commit()
+            displayFragment(MyListFragment(), fragmentManager)
         }
+        displayFragment(LibraryFragment.newInstance(), fragmentManager)
+    }
+
+    fun displayFragment(fragment: Fragment, fragmentManager: FragmentManager){
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView, fragment)
+        fragmentTransaction.commit()
     }
 
 

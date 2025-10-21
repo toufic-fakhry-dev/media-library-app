@@ -9,9 +9,10 @@ class AudioBook(
     val narrator: String,
     override val duration: Int,
     logger: Logger,
-    isAvailable: Boolean
+    isAvailable: Boolean,
+    genre: BookGenre
 ) :
-    Book(title, year, author, loanStatus, pages, isAvailable, logger), Playable {
+    Book(title, year, author, loanStatus, pages, isAvailable, logger, genre), Playable {
 
     override fun play() {
         println("Playing $title")
