@@ -4,4 +4,6 @@
     <string name="myList_button_text">My List</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="layout_list_option">List Layout</string>
+    <string name="layout_grid_option">Grid Layout</string>
 </resources>

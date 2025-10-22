@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.usj.onboardingapp.adapters.LibraryAdapter
 import com.usj.onboardingapp.R
-import com.usj.onboardingapp.utils.managers.SettingsManager
+import com.usj.onboardingapp.utils.LayoutPrefsManager
 import com.usj.onboardingapp.viewmodels.LibraryViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,45 +57,42 @@ class LibraryFragment : Fragment() {
             recyclerView.adapter = LibraryAdapter(libraryItems)
         }
         libraryViewModel.fetchLibraryItems()
-        setupMenuProvider()
+        requireActivity().addMenuProvider(setupMenuProvider())
+
     }
 
     private fun setupRVLayoutManager() {
-        val layoutMode = SettingsManager.getLayoutMode(requireContext())
-        recyclerView.layoutManager =
-            if (layoutMode == SettingsManager.LAYOUT_MODE_LIST) LinearLayoutManager(
-                requireContext()
-            )
-            else GridLayoutManager(
-                requireContext(),
-                2
-            )
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun setupMenuProvider() {
-        val menuProvider: MenuProvider = object : MenuProvider {
-            override fun onCreateMenu(
-                menu: Menu,
-                menuInflater: MenuInflater
-            ) {
+    private fun setupMenuProvider() : MenuProvider{
+        val menuProvider: MenuProvider = object : MenuProvider{
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.layout_mode_menu, menu)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                val chosenMode = when (menuItem.itemId) {
-                    R.id.layout_list_option -> SettingsManager.LAYOUT_MODE_LIST
-                    R.id.layout_grid_option -> SettingsManager.LAYOUT_MODE_GRID
-                    else -> return false
+                when (menuItem.itemId) {
+                    R.id.layout_list_option -> {
+                        LayoutPrefsManager.setLayoutStyle(
+                            requireContext(),
+                            LayoutPrefsManager.LAYOUT_LIST
+                        )
+                    }
+                    R.id.layout_grid_option -> {
+                        LayoutPrefsManager.setLayoutStyle(
+                            requireContext(),
+                            LayoutPrefsManager.LAYOUT_GRID
+                        )
+                    }
+                    else -> {
+                        return false
+                    }
                 }
-                SettingsManager.saveLayoutMode(
-                    requireContext(),
-                    chosenMode
-                )
-                setupRVLayoutManager()
                 return true
             }
         }
-        requireActivity().addMenuProvider(menuProvider)
+        return menuProvider
     }
 
     companion object {

@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             displayFragment(MyListFragment(), fragmentManager)
         }
         displayFragment(LibraryFragment.newInstance(), fragmentManager)
+        val toolBar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolBar)
     }
 
     fun displayFragment(fragment: Fragment, fragmentManager: FragmentManager){

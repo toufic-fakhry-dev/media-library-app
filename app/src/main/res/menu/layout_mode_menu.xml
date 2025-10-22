@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/layout_list_option"
-        android:icon="@drawable/baseline_list_24"
+        android:icon="@drawable/baseline_view_list_24"
         android:title="@string/layout_list_option"/>
     <item
         android:id="@+id/layout_grid_option"
-        android:icon="@drawable/baseline_grid_on_24"
+        android:icon="@drawable/baseline_image_24"
         android:title="@string/layout_grid_option"/>
 </menu>
